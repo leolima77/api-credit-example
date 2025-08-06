@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiCredit</name>
+    </assembly>
+    <members>
+        <member name="T:ApiCredit.Config">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ApiCredit.Controllers.CreditController.#ctor(ApiCredit.Services.Interfaces.ICreditService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApiCredit.Controllers.CreditController"/> class.
+            </summary>
+            <param name="creditService">Service to handle credit analysis logic.</param>
+        </member>
+        <member name="M:ApiCredit.Controllers.CreditController.CreditAnalysis(ApiCredit.Models.CreditAnalysisRequest)">
+            <summary>
+            Analyzes a credit request and returns the approval decision with risk index.
+            Parameters
+            UnemploymentTax: 7.5 (%)
+            Inflation: 4.2 (%)
+            CreditHistory: 8 (scale: 0 to 10)
+            Debts: 1000 (euros)
+            </summary>
+            <param name="creditAnalysisRequest">The request containing financial indicators and customer information.</param>
+            <returns>Returns risk index and whether the credit is approved.</returns>
+        </member>
+        <member name="M:ApiCredit.Controllers.DigitalKeyIntegrationController.SaveUserCallback(ApiCredit.Models.User)">
+            <summary>
+            Receives user data from the Digital Key system (mocked).
+            </summary>
+            <param name="user">User data retrieved from the Digital Key service.</param>
+            <returns>Returns the received user object for confirmation.</returns>
+        </member>
+        <member name="T:ApiCredit.Models.CreditAnalysisRequest">
+            <summary>
+            Represents a credit analysis request with personal and financial data.
+            </summary>
+        </member>
+        <member name="P:ApiCredit.Models.CreditAnalysisRequest.TaxId">
+            <summary>
+            Portuguese Tax Identification Number (NIF).
+            </summary>
+        </member>
+        <member name="P:ApiCredit.Models.CreditAnalysisRequest.UnemploymentTax">
+            <summary>
+            Current unemployment rate (percentage).
+            </summary>
+        </member>
+        <member name="P:ApiCredit.Models.CreditAnalysisRequest.Inflation">
+            <summary>
+            Current inflation rate (percentage).
+            </summary>
+        </member>
+        <member name="P:ApiCredit.Models.CreditAnalysisRequest.CreditHistory">
+            <summary>
+            Customer's credit history score (0 to 10).
+            </summary>
+        </member>
+        <member name="P:ApiCredit.Models.CreditAnalysisRequest.Debts">
+            <summary>
+            Total outstanding debts of the customer (in euros).
+            </summary>
+        </member>
+        <member name="T:ApiCredit.Services.Repositories.CreditService">
+            <summary>
+            Service responsible for processing credit requests and evaluating customer risk.
+            </summary>
+        </member>
+        <member name="M:ApiCredit.Services.Repositories.CreditService.#ctor(ApiCredit.Services.Interfaces.IRiskService,ApiCredit.Services.Interfaces.IDigitalKeyService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ApiCredit.Services.Repositories.CreditService"/> class.
+            </summary>
+            <param name="riskService">The service that calculates customer risk index.</param>
+            <param name="digitalKeyService">The service that retrieves user data using Tax ID.</param>
+        </member>
+        <member name="M:ApiCredit.Services.Repositories.CreditService.AskForCredit(System.String,System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            Processes a credit request and returns the risk analysis result.
+            </summary>
+            <param name="taxId">Tax Identification Number (NIF).</param>
+            <param name="unemploymentTax">Unemployment rate.</param>
+            <param name="inflation">Inflation rate.</param>
+            <param name="creditHistory">Customer credit score.</param>
+            <param name="debts">Total debts of the customer.</param>
+            <returns>A response indicating risk index and approval decision.</returns>
+        </member>
+        <member name="T:ApiCredit.Services.Repositories.DigitalKeyServices">
+            <summary>
+            Service responsible for simulating data retrieval from the Digital Key system using the Portuguese Tax ID.
+            </summary>
+        </member>
+        <member name="M:ApiCredit.Services.Repositories.DigitalKeyServices.GetDataByTaxId(System.String)">
+            <summary>
+            Simulates fetching user data from a trusted national identity source based on the provided tax ID.
+            </summary>
+            <param name="taxId">Portuguese Tax Identification Number (NIF).</param>
+            <returns>User object populated with mock data.</returns>
+        </member>
+        <member name="T:ApiCredit.Services.Repositories.RiskService">
+            <summary>
+            Service responsible for calculating the customer risk index based on economic and financial factors.
+            </summary>
+        </member>
+        <member name="M:ApiCredit.Services.Repositories.RiskService.CalculateRiskIndex(System.Double,System.Double,System.Int32,System.Double)">
+            <summary>
+            Calculates a risk index based on unemployment rate, inflation, credit history, and debts.
+            </summary>
+            <param name="unemploymentTax">Unemployment rate in percentage.</param>
+            <param name="inflation">Inflation rate in percentage.</param>
+            <param name="creditHistory">Credit history score (0-10).</param>
+            <param name="debts">Customer debts in euros.</param>
+            <returns>A risk index ranging from 0 (low risk) to 10 (high risk).</returns>
+        </member>
+    </members>
+</doc>
